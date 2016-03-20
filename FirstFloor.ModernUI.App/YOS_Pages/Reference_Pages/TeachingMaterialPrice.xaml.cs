@@ -23,7 +23,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
 
         //private OracleDataAdapter oraDA_EDUTOOL;
 
-        //private string connStr = "Data Source=orcl;User Id=scott;Password=tiger";
+		private string connStr = "User Id=scott;Password=tiger;Data Source=orcl";
 
         //static DataTable DT;
         //#endregion
@@ -32,7 +32,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
         public DataSet DS = new DataSet();
         public DataTable CloneDT = new DataTable();
         public StringWriter stream = new StringWriter();
-        
+
         public Dispatcher UIDispatcher = Application.Current.Dispatcher;
         
         public TeachingMaterialPrice()
@@ -41,12 +41,15 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
             UIDispatcher.Invoke(new Action(() => CSampleClient.Program.SrvrConn()));
             UIDispatcher.Invoke(new Action(() => CSampleClient.Program.SelectTable("EDUCATION_SUPPORT_TOOL")));
 
-            #region 데이터 가져오기 및 DataGrid에 추가        
-            //oraDA_EDUTOOL = new OracleDataAdapter("SELECT * FROM EDUCATION_SUPPORT_TOOL", connStr);
-            //oraBuilder_EDUTOOL = new OracleCommandBuilder(oraDA_EDUTOOL);            
-            //oraDA_EDUTOOL.Fill(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL");
-            //DataTable DT = EDUCATION_SUPPORT_TOOL_DS.Tables["EDUCATION_SUPPORT_TOOL"]; //전송
-            //EDUTOOL_DG1.ItemsSource = DT.DefaultView;//수신
+            #region 데이터 가져오기 및 DataGrid에 추가
+            oraDA_EDUTOOL = new OracleDataAdapter("SELECT * FROM EDUCATION_SUPPORT_TOOL ", connStr);
+
+            oraBuilder_EDUTOOL = new OracleCommandBuilder(oraDA_EDUTOOL);
+
+            oraDA_EDUTOOL.Fill(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL");
+
+            DataTable DT = EDUCATION_SUPPORT_TOOL_DS.Tables["EDUCATION_SUPPORT_TOOL"];
+            EDUTOOL_DG1.ItemsSource = DT.DefaultView;
             #endregion
         }
         //internal static void WaitForPriority(DispatcherPriority priority)

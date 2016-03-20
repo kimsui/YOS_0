@@ -16,10 +16,9 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
     /// </summary>
     public partial class Patners : UserControl
     {
-
-        private string strOraConn = "Data Source=orcl;User Id=scott;Password=tiger";
+		private string strOraConn = "User Id=scott;Password=tiger;Data Source=orcl";
         //private OracleConnection Con = new OracleConnection();
-        private DataSet PERSON_DS = new DataSet("PERSON_DS");
+		private DataSet LECTURER_DS = new DataSet("LECTURER_DS");
         private OracleCommandBuilder oraBuilder; // SelectCommand(읽기), InsertCommend(삽입), DeleteCommand(삭제), UpdateCommand(수정)의 기능
         private OracleDataAdapter Adpt;
 
@@ -33,13 +32,15 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
 
             Adpt = new OracleDataAdapter("SELECT * FROM LECTURER", strOraConn);
 
-            DataTable PERSON_dt = PERSON_DS.Tables["PERSON_dt"];
+            DataTable LECTURER_dt = LECTURER_DS.Tables["LECTURER_dt"];
 
             oraBuilder = new OracleCommandBuilder(Adpt);
 
-            Adpt.Fill(PERSON_DS, "PERSON_dt");
-            DG1.ItemsSource = PERSON_DS.Tables["PERSON_dt"].DefaultView;
+            Adpt.Fill(LECTURER_DS, "LECTURER_dt");
+            DG1.ItemsSource = LECTURER_DS.Tables["LECTURER_dt"].DefaultView;
             DG1.CanUserAddRows = false;
+
+            #endregion
         }
         public void StackPannel_control_init()
         {
@@ -72,30 +73,43 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
         }
         private void Btn_Register_Click(object sender, RoutedEventArgs e)
         {
-            DataTable PERSON_dt = PERSON_DS.Tables["PERSON_dt"];
+            DataTable LECTURER_dt = LECTURER_DS.Tables["LECTURER_dt"];
 
 
             if (DG1.SelectedIndex == -1)
             {
                 //1. 체크박스.Checked == true라면 변수를 1 아니라면 변수를 2로 해서 저장하고 불러오는 방법
                 //2. 체크박스.Checked.ToString() 자체를 저장한 후 불러온 값이 "true"라면 남자 아니면 여자로 설정하는 방법
+				//string Gender;
 
-                PERSON_dt.Rows.Add(PERSON_dt.Rows.Count + 1, TextFirstName.Text, TextLastName.Text, TxtPhoneNumber.Text, TxtBirth.Text, "", TxtAddress.Text, TxtAddress2.Text);
+				//if (RadioGenderMan.Content.ToString()=="남자")
+				//{
+				//    RadioGenderMan.IsChecked = true;
+				//}
+
+				//if(PERSON_dt.Rows)
+				LECTURER_dt.Rows.Add(LECTURER_dt.Rows.Count + 1, TextFirstName.Text, TextLastName.Text, TxtPhoneNumber.Text, TxtBirth.Text, "", TxtAddress.Text, TxtAddress2.Text);
+
+
+                //if (RadioGenderMan.IsChecked == true)
+                //{
+                //    PERSON_dt.Rows = Convert.ToString();
+                //}
 
                 try
                 {
-                    Adpt.Update(PERSON_DS, "PERSON_dt");
+                    Adpt.Update(LECTURER_DS, "PERSON_dt");
                     MessageBox.Show("추가가 완료되었습니다.");
                 }
                 catch (Exception ex)
                 {
-                    PERSON_dt.Rows.RemoveAt(PERSON_dt.Rows.Count - 1);
+					LECTURER_dt.Rows.RemoveAt(LECTURER_dt.Rows.Count - 1);
                     MessageBox.Show("에러가 발생해 추가가 되지 않았습니다\n 에러메세지: " + ex.ToString());
                 }
             }
 
             string Record = "";
-            foreach (DataRow R in PERSON_dt.Rows)
+            foreach (DataRow R in LECTURER_dt.Rows)
             {
                 switch (R.RowState)
                 {
@@ -118,7 +132,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
 
             try
             {
-                Adpt.Update(PERSON_DS, "PERSON_dt");
+                Adpt.Update(LECTURER_DS, "LECTURER_dt");
             }
             catch (Exception ex)
             {
@@ -142,11 +156,11 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
             {
                 DataGridRow row = (DataGridRow)DG1.ItemContainerGenerator.ContainerFromIndex(DG1.SelectedIndex);
                 string expression = "NAME = '" + ((TextBlock)(DG1.Columns[0].GetCellContent(row).Parent as DataGridCell).Content).Text + "'";
-                DataRow[] DeleteRow = PERSON_DS.Tables["PERSON_dt"].Select(expression);
+                DataRow[] DeleteRow = LECTURER_DS.Tables["LECTURER_dt"].Select(expression);
 
-                PERSON_DS.Tables["PERSON_dt"].Rows[DG1.SelectedIndex].Delete();
+				LECTURER_DS.Tables["LECTURER_dt"].Rows[DG1.SelectedIndex].Delete();
 
-                Adpt.Update(PERSON_DS, "PERSON_dt");
+                Adpt.Update(LECTURER_DS, "LECTURER_dt");
 
                 MessageBox.Show("삭제 성공");
                 StackPannel_control_init();
@@ -156,6 +170,5 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
                 MessageBox.Show("오류 : " + ex.ToString());
             }
         }
-        #endregion
     }
 }

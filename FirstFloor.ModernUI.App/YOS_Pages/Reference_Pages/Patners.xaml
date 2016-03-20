@@ -21,7 +21,7 @@
                     <mui:DataGridTextColumn Header="번호" Visibility="Hidden" Binding="{Binding LECTURERNO}"/>
                     <mui:DataGridTextColumn Header="이름"  Binding="{Binding LECTURERNAME}"/>
                     <mui:DataGridTextColumn Header="직책" Binding="{Binding JOB}"/>
-                    <mui:DataGridTextColumn Header="성별" Visibility="Hidden" Binding="{Binding GENDER}"/>
+                    <mui:DataGridTextColumn Header="성별" Visibility="Visible" Binding="{Binding GENDER}"/>
                     <mui:DataGridTextColumn Header="전화번호" Binding="{Binding PHONENUMBER}"/>
                     <mui:DataGridTextColumn Header="생년월일" Visibility="Hidden" Binding="{Binding BIRTHDATE}"/>
                     <mui:DataGridTextColumn Header="도시" Visibility="Hidden" Binding="{Binding CITY}"/>
@@ -72,8 +72,8 @@
                 <!--#region 성별-->
                 <StackPanel>
                     <Label Content="성별" Target="{Binding ElementName=RadioGender}"/>
-                    <RadioButton x:Name="RadioGenderMan" Content="남자" GroupName="Gender" Checked="RadioGenderMan_Checked" />
-                    <RadioButton x:Name="RadioGenderWoman" Content="여자" Margin="8,0,0,0" GroupName="Gender" Checked="RadioGenderWoman_Checked" />
+                    <RadioButton x:Name="RadioGenderMan" Content="남자" GroupName="Gender" Checked="RadioGenderMan_Checked" IsChecked="{Binding BindingGroupName=남자 ,ElementName=DG1, Path=SelectedItem.GENDER, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <RadioButton x:Name="RadioGenderWoman" Content="여자" Margin="8,0,0,0" GroupName="Gender" Checked="RadioGenderWoman_Checked" IsChecked="{Binding ElementName=DG1, Path=SelectedItem.GENDER, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <!--#endregion-->
                 <!--#region 전화번호-->
