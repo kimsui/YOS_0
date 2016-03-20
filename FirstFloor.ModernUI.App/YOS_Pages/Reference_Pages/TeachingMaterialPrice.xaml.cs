@@ -70,37 +70,39 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
         #region 추가 button click event
         private void btn_Insert_Click(object sender, RoutedEventArgs e)
         {
-            //if ((string)btn_Insert.Content == "확인")
-            //{
-            //    try
-            //    {
-            //        //oraDA_EDUTOOL.Update(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL"); //서버
-            //        //CloneDT = new DataTable();
-            //        // CloneDT.Clear();
-            //        CSampleClient.Program.SrvrConn();
-            //        //CloneDT = DT.
-            //        //CloneDT.TableName = "XMLTABLE";
-            //        // DS.Tables.Add(CloneDT);
-            //        // DS.Tables.Clear();
-            //        //DS.Tables.Add(DT_1);
-            //        DS.WriteXml(stream, XmlWriteMode.WriteSchema);
+            if ((string)btn_Insert.Content == "확인")
+            {
+                try
+                {
+                    //oraDA_EDUTOOL.Update(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL"); //서버
+                    //CloneDT = new DataTable();
+                    // CloneDT.Clear();
+                    UIDispatcher.Invoke(new Action(() => CSampleClient.Program.SrvrConn()));
+                    UIDispatcher.Invoke(new Action(() => DT_1 = YOS.CAccessDB.getdt()));
+                    
 
-            //        CSampleClient.Program.UpdateTable(stream.ToString());
+                    CloneDT = DT_1.Copy();
+                    CloneDT.TableName = "XMLTABLE";
+                    DS.Tables.Clear();
+                    DS.Tables.Add(CloneDT);             
+                                       
+                    DS.WriteXml(stream, XmlWriteMode.WriteSchema);
+                    CSampleClient.Program.UpdateTable(stream.ToString());
 
-            //        MessageBox.Show("추가 성공");
-            //        btn_Insert.Content = "추가";
-            //        EDUTOOL_DG1.IsReadOnly = true;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("오류 : " + ex.ToString());
-            //    }
-            //}
-            //else
-            //{
-            //    btn_Insert.Content = "확인";
-            //    EDUTOOL_DG1.IsReadOnly = false;
-            //}
+                    MessageBox.Show("추가 성공");
+                    btn_Insert.Content = "추가";
+                    EDUTOOL_DG1.IsReadOnly = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("오류 : " + ex.ToString());
+                }
+            }
+            else
+            {
+                btn_Insert.Content = "확인";
+                EDUTOOL_DG1.IsReadOnly = false;
+            }
         }
         #endregion
         #region 삭제 button click event
