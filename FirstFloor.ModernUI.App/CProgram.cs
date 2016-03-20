@@ -35,20 +35,20 @@ namespace CSampleClient
 
         }
 
-        static public void SendMessage(string message)
+        static public void SelectTable(string message)
         {
             CPacket msg = CPacket.create((short)PROTOCOL.CHAT_MSG_REQ);
             msg.push(message);
-            game_servers[0].send(msg);
-        
+            game_servers[0].send(msg); 
 
         //((CRemoteServerPeer)game_servers[0]).token.disconnect();
 
         //System.Threading.Thread.Sleep(1000 * 20);
         //Console.ReadKey();
+
         }
 
-        static public void SendMessage2(string dtmessage)
+        static public void UpdateTable(string dtmessage)
         {
             CPacket msg = CPacket.create((short)PROTOCOL.CHAT_MSG_UPDATE);
             msg.push(dtmessage);
@@ -64,7 +64,6 @@ namespace CSampleClient
 			{
 				IPeer server = new CRemoteServerPeer(server_token);
 				game_servers.Add(server);
-				//Console.WriteLine("Connected!");
 			}
 		}
 	}

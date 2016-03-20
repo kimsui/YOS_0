@@ -39,7 +39,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
         {
             InitializeComponent();
             UIDispatcher.Invoke(new Action(() => CSampleClient.Program.SrvrConn()));
-            UIDispatcher.Invoke(new Action(() => CSampleClient.Program.SendMessage("EDUCATION_SUPPORT_TOOL")));
+            UIDispatcher.Invoke(new Action(() => CSampleClient.Program.SelectTable("EDUCATION_SUPPORT_TOOL")));
 
             #region 데이터 가져오기 및 DataGrid에 추가        
             //oraDA_EDUTOOL = new OracleDataAdapter("SELECT * FROM EDUCATION_SUPPORT_TOOL", connStr);
@@ -48,10 +48,6 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
             //DataTable DT = EDUCATION_SUPPORT_TOOL_DS.Tables["EDUCATION_SUPPORT_TOOL"]; //전송
             //EDUTOOL_DG1.ItemsSource = DT.DefaultView;//수신
             #endregion
-        }
-        public TeachingMaterialPrice(string message)
-        {
-            
         }
         //internal static void WaitForPriority(DispatcherPriority priority)
         //{
@@ -66,48 +62,47 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
         //}
         //}
 
-        private static object ExitFrameOperation(object obj)
-        {
-            ((DispatcherFrame)obj).Continue = false;
-            return null;
-        }
+        //private static object ExitFrameOperation(object obj)
+        //{
+        //    ((DispatcherFrame)obj).Continue = false;
+        //    return null;
+        //}
         #region 추가 button click event
         private void btn_Insert_Click(object sender, RoutedEventArgs e)
         {
-            if ((string)btn_Insert.Content == "확인")
-            {
-                try
-                {
-                    //oraDA_EDUTOOL.Update(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL"); //서버
-                    //CloneDT = new DataTable();
-                    // CloneDT.Clear();
-                    CSampleClient.Program.SrvrConn();
-                    //CloneDT = DT.
-                    //CloneDT.TableName = "XMLTABLE";
-                    // DS.Tables.Add(CloneDT);
-                    // DS.Tables.Clear();
-                    //DS.Tables.Add(DT_1);
-                    DS.WriteXml(stream, XmlWriteMode.WriteSchema);
+            //if ((string)btn_Insert.Content == "확인")
+            //{
+            //    try
+            //    {
+            //        //oraDA_EDUTOOL.Update(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL"); //서버
+            //        //CloneDT = new DataTable();
+            //        // CloneDT.Clear();
+            //        CSampleClient.Program.SrvrConn();
+            //        //CloneDT = DT.
+            //        //CloneDT.TableName = "XMLTABLE";
+            //        // DS.Tables.Add(CloneDT);
+            //        // DS.Tables.Clear();
+            //        //DS.Tables.Add(DT_1);
+            //        DS.WriteXml(stream, XmlWriteMode.WriteSchema);
 
-                    CSampleClient.Program.SendMessage2(stream.ToString());
+            //        CSampleClient.Program.UpdateTable(stream.ToString());
 
-                    MessageBox.Show("추가 성공");
-                    btn_Insert.Content = "추가";
-                    EDUTOOL_DG1.IsReadOnly = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("오류 : " + ex.ToString());
-                }
-            }
-            else
-            {
-                btn_Insert.Content = "확인";
-                EDUTOOL_DG1.IsReadOnly = false;
-            }
+            //        MessageBox.Show("추가 성공");
+            //        btn_Insert.Content = "추가";
+            //        EDUTOOL_DG1.IsReadOnly = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("오류 : " + ex.ToString());
+            //    }
+            //}
+            //else
+            //{
+            //    btn_Insert.Content = "확인";
+            //    EDUTOOL_DG1.IsReadOnly = false;
+            //}
         }
         #endregion
-
         #region 삭제 button click event
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
@@ -136,7 +131,6 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
             }
         }
         #endregion
-
         public void EDUTOOL_DG1_Loaded(object sender, RoutedEventArgs e)
         {
 
