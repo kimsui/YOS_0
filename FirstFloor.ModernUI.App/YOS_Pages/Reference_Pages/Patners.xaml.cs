@@ -17,7 +17,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
     public partial class Patners : UserControl
     {
 
-        private string strOraConn = "Data Source=MYORACLE;User Id=dba_soo;Password=tnalsl";
+        private string strOraConn = "Data Source=orcl;User Id=scott;Password=tiger";
         //private OracleConnection Con = new OracleConnection();
         private DataSet PERSON_DS = new DataSet("PERSON_DS");
         private OracleCommandBuilder oraBuilder; // SelectCommand(읽기), InsertCommend(삽입), DeleteCommand(삭제), UpdateCommand(수정)의 기능
@@ -31,7 +31,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
 
             #region 데이터 가져오기 및 DataGrid에 추가
 
-            Adpt = new OracleDataAdapter("SELECT * FROM PERSON", strOraConn);
+            Adpt = new OracleDataAdapter("SELECT * FROM LECTURER", strOraConn);
 
             DataTable PERSON_dt = PERSON_DS.Tables["PERSON_dt"];
 

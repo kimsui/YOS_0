@@ -20,7 +20,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
 
         private OracleDataAdapter oraDA_ItemRate;
 
-        private string connStr = "Data Source=MYORACLE;User Id=dba_soo;Password=tnalsl";
+        private string connStr = "Data Source=orcl;User Id=scott;Password=tiger";
 
         #endregion
 

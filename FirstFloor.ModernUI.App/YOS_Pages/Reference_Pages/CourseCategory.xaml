@@ -11,11 +11,11 @@
         <StackPanel MinWidth="200">
             <TextBlock Text="강좌 분류" Style="{StaticResource Heading2}" Margin="0,0,0,15" />
             <StackPanel Margin="0,0,0,15" Orientation="Horizontal">
-                <RadioButton x:Name="Whole" Content="전체" IsChecked="True" Margin="5,0,15,2" GroupName="Category" FontSize="13.333" />
-                <RadioButton x:Name="Purpose" Content="목적별" Margin="0,0,15,2" GroupName="Category" FontSize="13.333" />
-                <RadioButton x:Name="Institution" Content="기관별" Margin="0,0,15,2" GroupName="Category" FontSize="13.333" />
-                <RadioButton x:Name="Target" Content="대상별" Margin="0,0,15,2" GroupName="Category" FontSize="13.333"/>
-                <RadioButton x:Name="Subject" Content="주제별" Margin="0,0,0,2" GroupName="Category" FontSize="13.333" />
+                <RadioButton x:Name="Whole" Content="전체" IsChecked="True" Margin="5,0,15,2" GroupName="Category" FontSize="13.333" Checked="Whole_Checked" />
+                <RadioButton x:Name="Purpose" Content="목적별" Margin="0,0,15,2" GroupName="Category" FontSize="13.333" Checked="Purpose_Checked" />
+                <RadioButton x:Name="Institution" Content="기관별" Margin="0,0,15,2" GroupName="Category" FontSize="13.333" Checked="Institution_Checked" />
+                <RadioButton x:Name="Target" Content="대상별" Margin="0,0,15,2" GroupName="Category" FontSize="13.333" Checked="Target_Checked"/>
+                <RadioButton x:Name="Subject" Content="주제별" Margin="0,0,0,2" GroupName="Category" FontSize="13.333" Checked="Subject_Checked" />
             </StackPanel>
             <ScrollViewer>
                 <StackPanel Orientation="Horizontal">

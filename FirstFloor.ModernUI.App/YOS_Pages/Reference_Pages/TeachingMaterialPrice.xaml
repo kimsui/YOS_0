@@ -15,7 +15,7 @@
                 <Button x:Name="btn_Delete" Content="삭제" Margin="20,0,0,20" Click="btn_Delete_Click"/>
             </StackPanel>
             <ScrollViewer>
-                <DataGrid x:Name="EDUTOOL_DG1" ItemsSource="{Binding ''}" AutoGenerateColumns="False" AlternationCount="3" SelectionMode="Extended" IsReadOnly="True">
+                <DataGrid x:Name="EDUTOOL_DG1" ItemsSource="{Binding ''}" AutoGenerateColumns="False" AlternationCount="3" SelectionMode="Extended" IsReadOnly="True" Loaded="EDUTOOL_DG1_Loaded" LayoutUpdated="EDUTOOL_DG1_LayoutUpdated" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="교구번호" Binding="{Binding EDUCATIONTOOLNO}" />
                         <DataGridTextColumn Header="교구이름" Binding="{Binding EDUCATIONTOOLNAME}" />

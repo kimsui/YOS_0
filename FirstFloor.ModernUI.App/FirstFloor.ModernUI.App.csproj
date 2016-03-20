@@ -41,6 +41,9 @@
     <StartupObject>FirstFloor.ModernUI.App.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FreeNet">
+      <HintPath>..\FreeNet\FreeNet\bin\Debug\FreeNet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\Binaries\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
@@ -70,6 +73,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BingImage.cs" />
+    <Compile Include="CAccessDB.cs" />
     <Compile Include="Content\ContentLoaderImages.xaml.cs">
       <DependentUpon>ContentLoaderImages.xaml</DependentUpon>
     </Compile>
@@ -91,6 +95,9 @@
     <Compile Include="Content\ControlsStylesDataGrid.xaml.cs">
       <DependentUpon>ControlsStylesDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CRemoteServerPeer.cs" />
+    <Compile Include="CProgram.cs" />
+    <Compile Include="Cprotocol.cs" />
     <Compile Include="Sample.xaml.cs">
       <DependentUpon>Sample.xaml</DependentUpon>
     </Compile>
@@ -579,6 +586,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="YOS_Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
