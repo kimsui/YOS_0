@@ -42,14 +42,14 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
             UIDispatcher.Invoke(new Action(() => CSampleClient.Program.SelectTable("EDUCATION_SUPPORT_TOOL")));
 
             #region 데이터 가져오기 및 DataGrid에 추가
-            oraDA_EDUTOOL = new OracleDataAdapter("SELECT * FROM EDUCATION_SUPPORT_TOOL ", connStr);
+            //oraDA_EDUTOOL = new OracleDataAdapter("SELECT * FROM EDUCATION_SUPPORT_TOOL ", connStr);
 
-            oraBuilder_EDUTOOL = new OracleCommandBuilder(oraDA_EDUTOOL);
+            //oraBuilder_EDUTOOL = new OracleCommandBuilder(oraDA_EDUTOOL);
 
-            oraDA_EDUTOOL.Fill(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL");
+            //oraDA_EDUTOOL.Fill(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL");
 
-            DataTable DT = EDUCATION_SUPPORT_TOOL_DS.Tables["EDUCATION_SUPPORT_TOOL"];
-            EDUTOOL_DG1.ItemsSource = DT.DefaultView;
+            //DataTable DT = EDUCATION_SUPPORT_TOOL_DS.Tables["EDUCATION_SUPPORT_TOOL"];
+            //EDUTOOL_DG1.ItemsSource = DT.DefaultView;
             #endregion
         }
         //internal static void WaitForPriority(DispatcherPriority priority)
