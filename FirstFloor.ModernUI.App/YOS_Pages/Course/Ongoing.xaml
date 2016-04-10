@@ -186,7 +186,7 @@
                     <!--#region 비용-->
                     <StackPanel x:Name="sp_Cost">
                         <Label x:Name="lb_Cost" Content="비용"/>
-                        <Button x:Name="btn_OpenCostResistrationWindow" Content="비용 등록"  Click="CommonDialog_Click"/>
+                        <Button x:Name="btn_OpenCostResistrationWindow" Content="비용 등록" IsEnabled="False" Click="CommonDialog_Click"/>
                     </StackPanel>
                     <!--#region 비용 제외 강의료-->
                     <StackPanel x:Name="sp_NetProfit">

@@ -86,7 +86,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Status.CostStatus_Pages
                 //long.TryParse(Total.Text, out tmoney);
 
                 long money = (long)(totalMoney * 0.65);
-                long comm = (long)(totalMoney * 0.10);
+                long comm = (long)(totalMoney * 0.05);
                 long bexp = (long)(totalMoney * 0.10);
                 long mfee = (long)(totalMoney * 0.10);
                 long cpro = (long)(totalMoney * 0.10);

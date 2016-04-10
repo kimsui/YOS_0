@@ -47,7 +47,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference_Pages
             }
             #region 데이터 가져오기 및 DataGrid에 추가
 
-            Adpt = new OracleDataAdapter("SELECT * FROM PARTNERS", strOraConn);
+            Adpt = new OracleDataAdapter("SELECT * FROM PARTNERS ORDER BY ID", strOraConn);
 
             DataTable PARTNERS_dt = PARTNERS_DS.Tables["PARTNERS_dt"];
 

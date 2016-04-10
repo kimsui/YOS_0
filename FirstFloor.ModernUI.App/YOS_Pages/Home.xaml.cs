@@ -81,7 +81,6 @@ namespace FirstFloor.ModernUI.App.YOS_Pages
 			}
 		}
 
-
 		private void btnEdit_Click(object sender, RoutedEventArgs e)
 		{
 			var wnd = new Windows.Controls.Page();

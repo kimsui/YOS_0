@@ -45,6 +45,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course.Complete_Pages
         private Dictionary<string, string> PLR = new Dictionary<string, string>();
         private Dictionary<string, int> PLlinker = new Dictionary<string, int>();
 
+        string selectid = "";
 
         public object SelectedItem { get; set; }
 
@@ -409,9 +410,9 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course.Complete_Pages
 
                 }
 
-                string s = LECTURE_dt.Rows[DGLEC.SelectedIndex].ItemArray[0].ToString();
+                string s = selectid;
                 if (s != "")
-                    s = " where LECTURENAME='" + s + "'";
+                    s = " where LECTUREID=" + s; ;
                 Adpt4 = new OracleDataAdapter("SELECT FOODEXPENSES+RENTALFEE+TEXTBOOK+TALK+CONJECTUREWORDCARD+STICKER+POSTCARD+PICTURECARD_A+PICTURECARD_B+CARDPOCKET+PROTECT+OTHERMATERIALS+ETC SUM FROM FEE" + s, strOraConn);
                 oraBuilder4 = new OracleCommandBuilder(Adpt4);
                 Adpt4.Fill(FEE_DS, "FEE_dt");

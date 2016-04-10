@@ -109,7 +109,7 @@
                     <!--#region 소개비-->
                     <StackPanel>
                         <Label Content="소개비" Width="Auto"/>
-                        <Label Content="(10%)" Width="61" HorizontalAlignment="Left" Foreground="#FFA81919" />
+                        <Label Content="(5%)" Width="61" HorizontalAlignment="Left" Foreground="#FFA81919" />
                         <TextBox x:Name="Commission" Width="150" />
                     </StackPanel>
                     <!--#region 서류 및 제안영업-->
