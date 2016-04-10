@@ -31,16 +31,18 @@ namespace FirstFloor.ModernUI.App.YOS_Content
         private OracleDataAdapter Adpt;
 
         string courseo = "";
+        string lid = "";
 
-        public AddCost(string lblCourse)
+        public AddCost(string lblCourse, string _lid)
         {
             InitializeComponent();
 
             courseo = lblCourse;
+            lid = _lid;
 
             #region 데이터 가져오기 및 DataGrid에 추가
 
-            Adpt = new OracleDataAdapter("SELECT count(*) FROM FEE WHERE LECTURENAME='" + courseo + "'", strOraConn);
+            Adpt = new OracleDataAdapter("SELECT count(*) FROM FEE WHERE LECTUREID=" + lid, strOraConn);
             oraBuilder = new OracleCommandBuilder(Adpt);
             Adpt.Fill(FEE_DS, "FEE_dt");
             DataTable FEE_dt = FEE_DS.Tables["FEE_dt"];
@@ -48,7 +50,7 @@ namespace FirstFloor.ModernUI.App.YOS_Content
             if (FEE_dt.Rows[0].ItemArray[0].ToString() == "0")
             {
                 FEE_dt.Clear();
-                Adpt = new OracleDataAdapter("INSERT INTO FEE(LECTURENAME, FOODEXPENSES, RENTALFEE, TEXTBOOK, TALK, CONJECTUREWORDCARD, STICKER, POSTCARD, PICTURECARD_A, PICTURECARD_B, CARDPOCKET, PROTECT, OTHERMATERIALS, ETC) VALUES ('" + courseo + "', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)", strOraConn);
+                Adpt = new OracleDataAdapter("INSERT INTO FEE(LECTUREID, FOODEXPENSES, RENTALFEE, TEXTBOOK, TALK, CONJECTUREWORDCARD, STICKER, POSTCARD, PICTURECARD_A, PICTURECARD_B, CARDPOCKET, PROTECT, OTHERMATERIALS, ETC) VALUES (" + lid + ", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)", strOraConn);
                 oraBuilder = new OracleCommandBuilder(Adpt);
                 Adpt.Fill(FEE_DS, "FEE_dt");
                 FEE_dt = FEE_DS.Tables["FEE_dt"];
@@ -56,7 +58,7 @@ namespace FirstFloor.ModernUI.App.YOS_Content
             }
 
             FEE_dt.Clear();
-            Adpt = new OracleDataAdapter("SELECT * FROM FEE WHERE LECTURENAME='" + courseo + "'", strOraConn);
+            Adpt = new OracleDataAdapter("SELECT * FROM FEE WHERE LECTUREID=" + lid , strOraConn);
             oraBuilder = new OracleCommandBuilder(Adpt);
             Adpt.Fill(FEE_DS, "FEE_dt");
             FEE_dt = FEE_DS.Tables["FEE_dt"];
@@ -83,7 +85,7 @@ namespace FirstFloor.ModernUI.App.YOS_Content
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Adpt = new OracleDataAdapter("UPDATE FEE SET FOODEXPENSES=" + tbx_FoodCosts.Text + ", RENTALFEE=" + tbx_VenueRentalFee.Text + ", TEXTBOOK=" + tbx_Textbook.Text + ", TALK=" + tbx_BoardGame.Text + ", CONJECTUREWORDCARD=" + tbx_AbstractCard.Text + ", STICKER=" + tbx_Sticker.Text + ", POSTCARD=" + tbx_Postcard.Text + ", PICTURECARD_A=" + tbx_ImageCardA.Text + ", PICTURECARD_B=" + tbx_ImageCardB.Text + ", CARDPOCKET=" + tbx_Pocket.Text + ", PROTECT=" + tbx_CardProtector.Text + ", OTHERMATERIALS=" + tbx_EtcMaterial.Text + ", ETC=" + tbx_Etc.Text + " WHERE LECTURENAME='" + courseo + "'", strOraConn);
+            Adpt = new OracleDataAdapter("UPDATE FEE SET FOODEXPENSES=" + tbx_FoodCosts.Text + ", RENTALFEE=" + tbx_VenueRentalFee.Text + ", TEXTBOOK=" + tbx_Textbook.Text + ", TALK=" + tbx_BoardGame.Text + ", CONJECTUREWORDCARD=" + tbx_AbstractCard.Text + ", STICKER=" + tbx_Sticker.Text + ", POSTCARD=" + tbx_Postcard.Text + ", PICTURECARD_A=" + tbx_ImageCardA.Text + ", PICTURECARD_B=" + tbx_ImageCardB.Text + ", CARDPOCKET=" + tbx_Pocket.Text + ", PROTECT=" + tbx_CardProtector.Text + ", OTHERMATERIALS=" + tbx_EtcMaterial.Text + ", ETC=" + tbx_Etc.Text + " WHERE LECTUREID=" + lid, strOraConn);
             oraBuilder = new OracleCommandBuilder(Adpt);
             
             DataTable FEE_dt = FEE_DS.Tables["FEE_dt"];

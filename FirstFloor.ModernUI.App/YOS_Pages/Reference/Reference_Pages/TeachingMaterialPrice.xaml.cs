@@ -51,7 +51,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Reference.Reference_Pages
                 {
                     oraDA_EDUTOOL.Update(EDUCATION_SUPPORT_TOOL_DS, "EDUCATION_SUPPORT_TOOL");
 
-                    MessageBox.Show("추가 성공");
+                    MessageBox.Show("데이터 업데이트 성공");
                     btn_Insert.Content = "추가";
                     EDUTOOL_DG1.IsReadOnly = true;
                 }

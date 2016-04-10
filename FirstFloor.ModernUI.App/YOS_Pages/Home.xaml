@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" MouseEnter="UserControl_MouseEnter">
     <DockPanel d:LayoutOverrides="Width, Height" >
-        <!--#region 프로그램명-->
         <TextBlock x:Name="tblTitle" Text="YStory Office Solution" Style="{StaticResource Heading1}" VerticalAlignment="Top" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="0,0,0,20"/>
         <StackPanel Margin="0,0,0,8" Orientation="Horizontal" d:LayoutOverrides="Height" DockPanel.Dock="Top">
             <TextBlock Style="{StaticResource Heading2}" VerticalAlignment="Top" HorizontalAlignment="Left" ><Run Text="공지 사항"/></TextBlock>
@@ -172,9 +171,7 @@
         </StackPanel>
 
         <Border BorderBrush="{DynamicResource ButtonBorder}" BorderThickness="1" DockPanel.Dock="Bottom" Margin="0,15,15,0">
-            
-            <!--<mui:ModernFrame x:Name="Frame" Source="/Content/ModernFrame/Sample.xaml" Width="480" Height="200" Padding="4" FragmentNavigation="Frame_FragmentNavigation" Navigated="Frame_Navigated" Navigating="Frame_Navigating" NavigationFailed="Frame_NavigationFailed"/>-->
-            <mui:ModernFrame x:Name="Frame" Source="/YOS_Content/Notice.xaml" Width="480" Height="200" Padding="4" />
+            <Label x:Name="lblNotice" Content=""/>
         </Border>
 
     </DockPanel>

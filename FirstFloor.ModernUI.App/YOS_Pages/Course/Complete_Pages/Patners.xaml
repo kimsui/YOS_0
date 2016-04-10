@@ -45,7 +45,7 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" >
                 <Label Content="이름" Target="{Binding ElementName=PartnerName}" FontWeight="Bold" />
-                <ComboBox x:Name="PartnerName" />
+                <ComboBox x:Name="PartnerName" Text="{Binding SelectedItem.NAME, ElementName=DG_CO_PL, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding}" DisplayMemberPath="NAME" />
             </StackPanel>
 
             <ScrollViewer>
@@ -96,9 +96,9 @@
                     <TextBlock Text="요약" Style="{StaticResource Heading2}" Margin="8,5,0,8"/>
                     <DataGrid x:Name="DG_CO_PD" ItemsSource="{Binding}" AutoGenerateColumns="False" d:LayoutOverrides="Width" >
                         <DataGrid.Columns>
-                            <mui:DataGridTextColumn Header="역할" Binding="{Binding NAME}"/>
-                            <mui:DataGridTextColumn Header="건수"  Binding="{Binding JOB}"/>
-                            <mui:DataGridTextColumn Header="합계 금액" Binding="{Binding C1}"/>
+                            <mui:DataGridTextColumn Header="역할" Binding="{Binding ROLE}"/>
+                            <mui:DataGridTextColumn Header="건수"  Binding="{Binding RC}"/>
+                            <mui:DataGridTextColumn Header="합계 금액" Binding="{Binding RS}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

@@ -40,10 +40,16 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
         private OracleDataAdapter Adpt8;
 
         private Dictionary<string, int> LECTUREL = new Dictionary<string, int>();
+        private Dictionary<string, string> LECTUREID = new Dictionary<string, string>();
         private Dictionary<string, string> PL = new Dictionary<string, string>();
         private Dictionary<string, string> PLR = new Dictionary<string, string>();
         private Dictionary<string, int> PLlinker = new Dictionary<string, int>();
+
+        string selectname = "";
+        string selectid = "";
+
         public object SelectedItem { get; set; }
+
 
         public Ongoing()
         {
@@ -57,7 +63,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
 
             #endregion
         }
-
+        
         private void wUpdate()
         {
             try
@@ -113,9 +119,11 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
             DataTable LECTUREO_dt = LECTUREO_DS.Tables["LECTUREO_dt"];
 
             LECTUREL.Clear();
+            LECTUREID.Clear();
             for (int i = 0; i < LECTUREO_dt.Rows.Count; i++)
             {
                 LECTUREL.Add(LECTUREO_dt.Rows[i].ItemArray[1].ToString(), i);
+                LECTUREID.Add(LECTUREO_dt.Rows[i].ItemArray[1].ToString(), LECTUREO_dt.Rows[i].ItemArray[0].ToString());
             }
 
             Adpt = new OracleDataAdapter("SELECT l.LECTURENAME, l.PURPOSECATEGORY, l.INSTITUTIONCATEGORY, l.TARGETCATEGORY, l.SUBJECTCATEGORY, p1.ID \"NC1\", p1.NAME \"N1\", p2.ID \"NC2\", p2.NAME \"N2\", p3.ID \"NC3\", p3.NAME \"N3\",l.LECPLACE, l.STARTDATE, l.CLOSEDATE, l.LECTURETIME, l.LECTUREFEE, l.COMPLETERATE FROM LECTURE l, PARTNERS p1, PARTNERS p2, PARTNERS p3 WHERE l.PROJMANAGER = p1.ID AND l.RECOMMENDER = p2.ID AND l.LECTURER = p3.ID AND NOT(l.COMPLETERATE=10)", strOraConn);
@@ -156,25 +164,23 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
 
         private void CommonDialog_Click(object sender, RoutedEventArgs e)
         {
-            var wnd = new Windows.Controls.Page();
+			var wnd = new Windows.Controls.Page();
 
-            wnd.Style = (Style)App.Current.Resources["BlankWindow"];
-            wnd.Title = "비용 등록 및 수정";
-            wnd.Width = 300;
-            wnd.Height = 480;
-            wnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+			wnd.Style = (Style)App.Current.Resources["BlankWindow"];
+			wnd.Title = "비용 등록 및 수정";
+			wnd.Width = 300;
+			wnd.Height = 480;
+			wnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            YOS_Content.AddCost wndCost = new YOS_Content.AddCost(tbx_Course.Text);
-            wndCost.lblCourse.Content = tbx_Course.Text;
+            YOS_Content.AddCost wndCost = new YOS_Content.AddCost(tbx_Course.Text, selectid);
+			wndCost.lblCourse.Content = tbx_Course.Text;
 
-            wnd.Content = wndCost;
+			wnd.Content = wndCost;
+			
+			wnd.Show();
+		}
 
-
-            wnd.Show();
-
-        }
-
-        private void btn_Registration_Click(object sender, RoutedEventArgs e)
+		private void btn_Registration_Click(object sender, RoutedEventArgs e)
         {
             DataTable LECTURE_dt = LECTURE_DS.Tables["LECTURE_dt"];
             DataTable LECTUREO_dt = LECTUREO_DS.Tables["LECTUREO_dt"];
@@ -290,27 +296,50 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
 
                         if (ec == false)
                         {
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][1] = R.ItemArray[0];
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][2] = R.ItemArray[1];
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][3] = R.ItemArray[2];
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][4] = R.ItemArray[3];
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][5] = R.ItemArray[4];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][1] = R.ItemArray[0];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][2] = R.ItemArray[1];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][3] = R.ItemArray[2];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][4] = R.ItemArray[3];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][5] = R.ItemArray[4];
 
-                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][6] = R.ItemArray[5];
-                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][7] = R.ItemArray[7];
-                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][8] = R.ItemArray[9];
+                            //LECTUREO_dt.Rows[LECTUREL[selectname]][6] = R.ItemArray[5];
+                            //LECTUREO_dt.Rows[LECTUREL[selectname]][7] = R.ItemArray[7];
+                            //LECTUREO_dt.Rows[LECTUREL[selectname]][8] = R.ItemArray[9];
 
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][6] = Convert.ToInt32(PLR[R.ItemArray[6].ToString()]);
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][7] = Convert.ToInt32(PLR[R.ItemArray[8].ToString()]);
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][8] = Convert.ToInt32(PLR[R.ItemArray[10].ToString()]);
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][6] = Convert.ToInt32(PLR[R.ItemArray[6].ToString()]);
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][7] = Convert.ToInt32(PLR[R.ItemArray[8].ToString()]);
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][8] = Convert.ToInt32(PLR[R.ItemArray[10].ToString()]);
 
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][9] = R.ItemArray[11];
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][10] = R.ItemArray[12];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][9] = R.ItemArray[11];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][10] = R.ItemArray[12];
 
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][11] = R.ItemArray[13];
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][12] = R.ItemArray[14];
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][13] = R.ItemArray[15];
-                            LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][14] = R.ItemArray[16];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][11] = R.ItemArray[13];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][12] = R.ItemArray[14];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][13] = R.ItemArray[15];
+                            LECTUREO_dt.Rows[LECTUREL[selectname]][14] = R.ItemArray[16];
+
+
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][1] = R.ItemArray[0];
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][2] = R.ItemArray[1];
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][3] = R.ItemArray[2];
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][4] = R.ItemArray[3];
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][5] = R.ItemArray[4];
+
+                            ////LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][6] = R.ItemArray[5];
+                            ////LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][7] = R.ItemArray[7];
+                            ////LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][8] = R.ItemArray[9];
+
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][6] = Convert.ToInt32(PLR[R.ItemArray[6].ToString()]);
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][7] = Convert.ToInt32(PLR[R.ItemArray[8].ToString()]);
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][8] = Convert.ToInt32(PLR[R.ItemArray[10].ToString()]);
+
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][9] = R.ItemArray[11];
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][10] = R.ItemArray[12];
+
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][11] = R.ItemArray[13];
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][12] = R.ItemArray[14];
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][13] = R.ItemArray[15];
+                            //LECTUREO_dt.Rows[LECTUREL[R.ItemArray[0].ToString()]][14] = R.ItemArray[16];
 
 
                             //PARTNERS_dt.Rows[PLlinker[R.ItemArray[5].ToString()]][1] = PLR[R.ItemArray[6].ToString()];
@@ -371,8 +400,17 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
 
             DataTable LECTURE_dt = LECTURE_DS.Tables["LECTURE_dt"];
 
+            if (DGLEC.SelectedIndex != -1)
+            {
+                selectname = LECTURE_dt.Rows[DGLEC.SelectedIndex].ItemArray[0].ToString();
+                selectid = LECTUREID[selectname].ToString();
+                
+                btn_OpenCostResistrationWindow.IsEnabled = true;
+            }
+
             Expense_Calculation();
 
+            
             //tbN1.Text = PL[LECTURE_dt.Rows[DGLEC.SelectedIndex].ItemArray[5].ToString()];
             //tbN2.Text = PL[LECTURE_dt.Rows[DGLEC.SelectedIndex].ItemArray[7].ToString()];
         }
@@ -400,6 +438,8 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
             DGLEC.SelectedIndex = -1;
             StackPannel_control_init();
             btn_Registration.Content = "등록";
+            btn_OpenCostResistrationWindow.IsEnabled = false;
+            lb_NetProfit_Value.Content = "";
         }
 
         private void tbN1_TextChanged(object sender, TextChangedEventArgs e)
@@ -427,6 +467,9 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             wUpdate();
+            StackPannel_control_init();
+            btn_OpenCostResistrationWindow.IsEnabled = false;
+            lb_NetProfit_Value.Content = "";
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
@@ -439,7 +482,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
 
             //LECTUREO_dt.Rows.RemoveAt(LECTUREL[LECTURE_dt.Rows[DGLEC.SelectedIndex].ItemArray[0].ToString()]);
             //LECTURE_dt.Rows.RemoveAt(DGLEC.SelectedIndex);
-
+            
             btn_Registration_Click(null, null);
         }
 
@@ -448,7 +491,7 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
             if (DGLEC.SelectedIndex != -1)
             {
                 DataTable FEE_dt = FEE_DS.Tables["FEE_dt"];
-                DataTable LECTURE_dt = LECTURE_DS.Tables["LECTURE_dt"];
+            DataTable LECTURE_dt = LECTURE_DS.Tables["LECTURE_dt"];
                 try
                 {
                     FEE_dt.Clear();
@@ -458,15 +501,18 @@ namespace FirstFloor.ModernUI.App.YOS_Pages.Course
 
                 }
 
-                string s = LECTURE_dt.Rows[DGLEC.SelectedIndex].ItemArray[0].ToString();
+                string s = selectid;
                 if (s != "")
-                    s = " where LECTURENAME='" + s + "'";
+                    s = " where LECTUREID=" + s; ;
                 Adpt4 = new OracleDataAdapter("SELECT FOODEXPENSES+RENTALFEE+TEXTBOOK+TALK+CONJECTUREWORDCARD+STICKER+POSTCARD+PICTURECARD_A+PICTURECARD_B+CARDPOCKET+PROTECT+OTHERMATERIALS+ETC SUM FROM FEE" + s, strOraConn);
                 oraBuilder4 = new OracleCommandBuilder(Adpt4);
                 Adpt4.Fill(FEE_DS, "FEE_dt");
                 FEE_dt = FEE_DS.Tables["FEE_dt"];
 
-                lb_NetProfit_Value.Content = FEE_dt.Rows[0].ItemArray[0].ToString();
+                if (FEE_dt.Rows.Count != 0)
+                    lb_NetProfit_Value.Content = FEE_dt.Rows[0].ItemArray[0].ToString();
+                else
+                    lb_NetProfit_Value.Content = "등록안됨";
             }
         }
     }

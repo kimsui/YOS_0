@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"> 
     <Grid Style="{StaticResource ContentRoot}">
         <mui:ModernTab SelectedSource="/YOS_Pages/Status/CostStatus_Pages/Course.xaml" Layout="List">
                 <mui:ModernTab.Links>
                 <mui:Link DisplayName="강좌별 수수료 현황" Source="/YOS_Pages/Status/CostStatus_Pages/Course.xaml"/>
                 <mui:Link DisplayName="파트너별 수수료 현황" Source="/YOS_Pages/Status/CostStatus_Pages/Patners.xaml"/>
-                <mui:Link DisplayName="현황 그래프" Source="/YOS_Pages/Status/CostStatus_Pages/Chart.xaml"/>
+
             </mui:ModernTab.Links>
             </mui:ModernTab>
     </Grid>

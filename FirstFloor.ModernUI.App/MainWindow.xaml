@@ -37,7 +37,6 @@
         <mui:LinkGroup DisplayName="Status" >
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName ="비용 현황" Source="/YOS_Pages/Status/CostStatus.xaml" />
-                <mui:Link DisplayName ="모임 회비" Source="/YOS_Pages/Status/MembershipFee.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <!--#endregion-->
@@ -45,14 +44,6 @@
         <mui:LinkGroup DisplayName="Reference">
             <mui:LinkGroup.Links>
                 <mui:Link Source="/YOS_Pages/Reference/Reference.xaml" />
-            </mui:LinkGroup.Links>
-        </mui:LinkGroup>
-        <!--#endregion-->
-        <!--#region 메뉴 샘플 : Controls-->
-        <mui:LinkGroup DisplayName="Controls">
-            <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Styles" Source="/Pages/ControlsStyles.xaml" />
-                <mui:Link DisplayName="Modern controls" Source="/Pages/ControlsModern.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <!--#endregion-->
