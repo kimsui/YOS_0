@@ -43,7 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FreeNet">
-      <HintPath>..\FreeNet\bin\Debug\FreeNet.dll</HintPath>
+      <HintPath>..\..\..\BITSOFT_YOS_SERVER\CSampleServer\bin\Release\FreeNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\Binaries\Microsoft.Windows.Shell.dll</HintPath>
